@@ -8,7 +8,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 const Register = () => {
   const [accountType, setAccountType] = useState("organisation");
   const [formData, setFormData] = useState({
-    firstName: "",
+    firstName: "", 
     lastName: "",
     jobTitle: "",
     organisation: "",
