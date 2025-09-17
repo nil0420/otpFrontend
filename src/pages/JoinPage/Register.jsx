@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../App.css";
 
+// for production
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Register = () => {
   const [accountType, setAccountType] = useState("organisation");
   const [formData, setFormData] = useState({
@@ -31,9 +34,9 @@ const Register = () => {
       alert("Please enter your work email");
       return;
     }
-
+// "/api/send-otp"
     try {
-      const res = await axios.post("/api/send-otp", { email: formData.email });
+      const res = await axios.post(`${API_URL}/send-otp`, { email: formData.email });
       if (res.data.success) {
         setStep("otp");
       } else {
@@ -46,10 +49,11 @@ const Register = () => {
   };
 
   // Handle OTP Verification
+  //  "/api/verify-otp"
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/verify-otp", {
+      const res = await axios.post(`${API_URL}/verify-otp`, {
         email: formData.email,
         otp,
       });
