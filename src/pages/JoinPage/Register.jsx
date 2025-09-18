@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../../App.css";
 
-// for production
 const API_URL = import.meta.env.VITE_API_URL;
 
 const Register = () => {
@@ -20,7 +19,7 @@ const Register = () => {
     referral: "",
   });
 
-  const [step, setStep] = useState("register"); // register → otp → success
+  const [step, setStep] = useState("register");
   const [otp, setOtp] = useState("");
 
   const handleChange = (e) => {
@@ -36,7 +35,7 @@ const Register = () => {
     }
 
     try {
-      const res = await axios.post(`${API_URL}/api/send-otp`, { email: formData.email });
+      const res = await axios.post(`${API_URL}/send-otp`, { email: formData.email });
       if (res.data.success) {
         setStep("otp");
       } else {
@@ -74,34 +73,21 @@ const Register = () => {
         We provide access to top companies and resources that can help accelerate your growth.
       </p>
 
-      {/* Step 1: Register Form */}
+    
       {step === "register" && (
         <>
-          {/* Toggle */}
+        
           <div className="register-toggle">
             <label>
-              <input
-                type="radio"
-                name="accountType"
-                value="organisation"
-                checked={accountType === "organisation"}
-                onChange={(e) => setAccountType(e.target.value)}
-              />{" "}
+              <input type="radio" name="accountType" value="organisation" checked={accountType === "organisation"} onChange={(e) => setAccountType(e.target.value)}/>{" "}
               Organisation
             </label>
             <label>
-              <input
-                type="radio"
-                name="accountType"
-                value="individual"
-                checked={accountType === "individual"}
-                onChange={(e) => setAccountType(e.target.value)}
-              />{" "}
+              <input type="radio" name="accountType" value="individual" checked={accountType === "individual"} onChange={(e) => setAccountType(e.target.value)}/>{" "}
               Individual
             </label>
           </div>
 
-          {/* Conditional Rendering of Forms */}
           {accountType === "organisation" ? (
             <form className="register-form" onSubmit={handleRegister}>
               <div className="form-row">
@@ -148,7 +134,6 @@ const Register = () => {
         </>
       )}
 
-      {/* Step 2: OTP Form */}
       {step === "otp" && (
         <form className="register-form" onSubmit={handleVerifyOtp}>
           <div className="form-row">
@@ -163,10 +148,9 @@ const Register = () => {
         </form>
       )}
 
-      {/* Step 3: Success Page */}
       {step === "success" && (
         <div className="register-success">
-          <h2>🎉 Registration Successful!</h2>
+          <h2> Registration Successful!</h2>
           <p>Email: {formData.email}</p>
         </div>
       )}
