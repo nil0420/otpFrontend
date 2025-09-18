@@ -34,22 +34,20 @@ const Register = () => {
       alert("Please enter your work email");
       return;
     }
-// "/api/send-otp"
+
     try {
-      const res = await axios.post(`${API_URL}/send-otp`, { email: formData.email });
+      const res = await axios.post(`${API_URL}/api/send-otp`, { email: formData.email });
       if (res.data.success) {
         setStep("otp");
       } else {
         alert(res.data.message);
       }
     } catch (err) {
-      console.error(err);
+      console.log("sdsds" + err);
       alert("Error sending OTP");
     }
   };
 
-  // Handle OTP Verification
-  //  "/api/verify-otp"
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
