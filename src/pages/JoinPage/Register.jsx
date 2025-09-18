@@ -35,7 +35,7 @@ const Register = () => {
     }
 
     try {
-      const res = await axios.post(`${API_URL}/api/send-otp`, { email: formData.email });
+      const res = await axios.post(`${API_URL}/send-otp`, { email: formData.email });
       if (res.data.success) {
         setStep("otp");
       } else {
